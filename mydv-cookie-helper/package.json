@@ -1,0 +1,13 @@
+{
+  "name": "mydv-cookie-helper",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Open Douyin web login in a real desktop browser and export a Cookie header string for myDV.",
+  "scripts": {
+    "login": "node extract-douyin-cookie.mjs"
+  },
+  "dependencies": {
+    "playwright-core": "^1.53.2"
+  }
+}
