@@ -1,35 +1,79 @@
 # myDV Speed Selector Build
 
-This repository contains two deliverables:
+This repository contains:
 
 - `myDV_V1.1.9_speed-selector.apk`
 - `mydv-cookie-helper/`
 
-## Upstream
+## Based On
 
-The APK patch is based on:
+This build is based on the original `myDV` project and its `V1.1.9` release APK:
 
-- Repository: `https://github.com/mytv-android/myDV`
-- Release APK: `myDV_V1.1.9_app-release.apk`
+- Upstream repository: `https://github.com/mytv-android/myDV`
+- Original APK: `myDV_V1.1.9_app-release.apk`
 
-The app was unpacked locally and patched at the smali level from the decompiled workspace under `myDV_apktool/`.
+## What Is Added Compared With The Original Build
 
-## What Changed
+This APK adds one practical TV feature that the original release does not provide:
 
-### APK changes
+- `Default playback speed` in Settings
 
-- Added a default playback speed selector to the settings screen.
-- The selector writes to the app's existing `playback_speed` preference so playback follows the chosen speed for all videos.
-- The earlier unstable injection path was removed and replaced with a safer standalone selector path.
+After choosing a speed, all videos will start with that speed automatically.
 
-### Cookie helper changes
+Available options:
 
-- Packaged the Douyin web login helper separately under `mydv-cookie-helper/`.
-- Added `run-login.cmd` so the helper can be started by double-clicking on Windows.
-- Kept the helper output file out of the packaged build so no live login cookie is included.
+- `0.5x`
+- `0.75x`
+- `1.0x`
+- `1.25x`
+- `1.5x`
+- `2.0x`
+- `3.0x`
 
-## Notes
+## Where To Find It
 
-- This APK is a re-signed build and cannot be installed over the original official-signed APK. Uninstall the original app first.
-- `mydv-cookie-helper/` is intended to export a fresh cookie locally after login.
-- `douyin-cookie-for-mydv.txt` is intentionally not included in this repository.
+Open `myDV` on the TV, then go to:
+
+- `Settings`
+- `Default playback speed`
+
+Pick the speed you want and the app will use it for later playback.
+
+## What The Login Helper Is For
+
+`mydv-cookie-helper/` is a small Windows helper for users who want to log into Douyin web first and then paste the exported cookie into `myDV`.
+
+It is meant for this workflow:
+
+1. Start the helper on a Windows PC.
+2. Open the Douyin web login page.
+3. Scan and log in.
+4. Export the current login cookie to a local text file.
+5. Copy that cookie into `myDV`.
+
+## How To Use The Login Helper
+
+Open the `mydv-cookie-helper` folder and double-click:
+
+- `run-login.cmd`
+
+It will open the browser login flow and then create:
+
+- `douyin-cookie-for-mydv.txt`
+
+After that:
+
+1. Open the text file.
+2. Copy the whole line.
+3. Paste it into the `Cookie` input inside `myDV`.
+
+## Files
+
+- `myDV_V1.1.9_speed-selector.apk`: the patched TV APK
+- `mydv-cookie-helper/`: the Windows helper used to get a fresh Douyin login cookie
+
+## Important Notes
+
+- This APK is re-signed, so it cannot be installed directly over the original official APK. Uninstall the original app first.
+- No live login cookie is included in this repository.
+- `douyin-cookie-for-mydv.txt` is generated locally after login and is ignored by Git.
